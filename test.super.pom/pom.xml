@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipse.scout</groupId>
+    <artifactId>maven_rt_plugin_config-master</artifactId>
+    <version>2.0</version>
+  </parent>
+
+  <groupId>test.scout</groupId>
+  <artifactId>super.pom</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Scout Super POM Project</name>
+
+  <properties>
+    <com.sixt.leasing.scout.scout.version>0.0.1-SNAPSHOT</com.sixt.leasing.scout.scout.version>
+    <jdk.source.version>1.8</jdk.source.version>
+    <org.eclipse.scout.rt_version>5.2.0.M4</org.eclipse.scout.rt_version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Scout Dependencies -->
+      <dependency>
+        <groupId>org.eclipse.scout.rt</groupId>
+        <artifactId>org.eclipse.scout.rt</artifactId>
+        <version>${org.eclipse.scout.rt_version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      
+      <dependency>
+	      <groupId>org.eclipse.xtend</groupId>
+	      <artifactId>org.eclipse.xtend.lib</artifactId>
+	      <version>2.9.0</version>
+      </dependency>
+
+      <dependency>
+	      <groupId>org.postgresql</groupId>
+	      <artifactId>postgresql</artifactId>
+	      <version>9.4-1206-jdbc42</version>
+      </dependency>
+
+      <dependency>
+	      <groupId>org.codehaus.sonar</groupId>
+	      <artifactId>sonar-maven-plugin</artifactId>
+	      <version>5.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>xtend-maven-plugin</artifactId>
+					<version>2.9.0</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+								<goal>testCompile</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/xtend-gen/main</outputDirectory>
+								<testOutputDirectory>${project.build.directory}/xtend-gen/test</testOutputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+		        <plugin>
+		          <artifactId>maven-enforcer-plugin</artifactId>
+		          <configuration>
+		            <skip>true</skip><!-- 
+		            <rules>
+		              <requirePluginVersions>
+		              	<level>WARN</level>
+		                <message>Build reproducibility : always define plugin versions</message>
+		                <banLatest>true</banLatest>
+		                <banRelease>true</banRelease>
+		                <phases>clean,deploy</phases>
+		                <unCheckedPluginList>org.apache.maven.plugins:maven-deploy-plugin</unCheckedPluginList>
+		              </requirePluginVersions>
+		              <requireReleaseDeps>
+		                <message>No SNAPSHOT versions allowed for dependencies</message>
+		                <onlyWhenRelease>true</onlyWhenRelease>
+		              </requireReleaseDeps>
+		              <requireJavaVersion>
+		                <message>To build this project JDK 1.8 (or upper) is required. Please install it.</message>
+		                <version>1.8</version>
+		              </requireJavaVersion>
+		              <requireMavenVersion>
+		                <message>To build this project Maven 3.2.1 (or upper) is required. Please install it.</message>
+		                <version>3.2.1</version>
+		              </requireMavenVersion>
+		              <bannedDependencies>
+		                <message>commons-beanutils:commons-beanutils should be used instead</message>
+		                <excludes>
+		                  <exclude>commons-beanutils:commons-beanutils-core</exclude>
+		                </excludes>
+		                <searchTransitive>true</searchTransitive>
+		              </bannedDependencies>
+		              <banDuplicatePomDependencyVersions></banDuplicatePomDependencyVersions>
+		              <requireSameVersions>
+		                <dependencies>
+		                  <dependency>org.eclipse.scout</dependency>
+		                  <dependency>org.eclipse.scout.rt</dependency>
+		                  <dependency>org.eclipse.scout.sdk</dependency>
+		                </dependencies>
+		              </requireSameVersions>
+		              <requireSameVersions>
+		                <dependencies>
+		                  <dependency>org.eclipse.jetty</dependency>
+		                </dependencies>
+		              </requireSameVersions>
+		            </rules> -->
+		          </configuration>
+		        </plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
